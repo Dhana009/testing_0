@@ -1,15 +1,9 @@
 pipeline {
   agent any
-  options { timestamps(); ansiColor('xterm') }
+  options { timestamps() }
   stages {
-    stage('Checkout') {
-      steps { checkout scm }
-    }
-    stage('Build image') {
-      steps {
-        sh 'docker build -t allure-demo .'
-      }
-    }
+    stage('Checkout') { steps { checkout scm } }
+    stage('Build image') { steps { sh 'docker build -t allure-demo .' } }
     stage('Run tests') {
       steps {
         sh 'rm -rf allure-results || true && mkdir -p allure-results'
